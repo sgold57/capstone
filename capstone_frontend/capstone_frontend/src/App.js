@@ -7,16 +7,17 @@ export default class App extends Component {
   render(){
     return (
       <div className="App">
-        <h1 className="login-header">Souljaboyteller.com</h1>
-        <form className="login-form">
-          <h2>Sign In</h2>
-          <label>Username</label>
-          <input type="text" name="username" />
-          <label>Password</label>
-          <input type="text" name="password" />
-          <button id="login-button" type="submit">Sign In!</button>
-        </form>
+      <h1 className="login-header-1">SOULJABOYTELLER.COM</h1>
+      <img id="crank-dat-gif" src="https://media.giphy.com/media/DBGvqaeMvPU5i/giphy.gif" />
+      <h2 className="login-header-2">Sign In</h2>
+      <form className="login-form">
+        <label>YOUUSERNAME</label>
+        <input type="text" name="username" />
+        <label>PASSWORD</label>
+        <input type="text" name="password" />
+        <button id="login-button" type="submit">Sign In!</button>
+      </form>
 
-      </div>
+    </div>
   )};
 };
