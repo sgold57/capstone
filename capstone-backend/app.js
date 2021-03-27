@@ -43,13 +43,6 @@ app.get("/api", (req, res) => {
 
 const plaid = require('plaid');
 
-// const plaid = require('plaid')
-// const plaidClient = new plaid.Client({
-//   "clientId": "60591e81bf6a120012cee04e", 
-//   "secret": "4f677ef9b9c13da8d7275c75b5ed00",
-//   "env": plaid.environments.sandbox
-// });
-
 
 app.get("/users", (_, response) => {
   database('users')
