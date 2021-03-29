@@ -10,7 +10,8 @@ require('dotenv').config();
 
 
 const axios = require('axios');
-app.get("/api", (req, res) => {
+
+let aToken = app.get("/api", (req, res) => {
   axios.post('https://sandbox.plaid.com/sandbox/public_token/create', {
     "client_id": process.env.CLIENT_ID,
     "secret": process.env.SECRET,
@@ -37,7 +38,7 @@ app.get("/api", (req, res) => {
       res.send({ error: error });
     })
     .then(function () {
-      // always executed
+      console.log(aToken)
     });
 })
 
