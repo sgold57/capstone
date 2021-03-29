@@ -1,12 +1,12 @@
 {
-  "name": "capstone-backend",
+  "name": "capstone-backend-take-2",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx node app.js",
-    "dev": "npx nodemon app.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +16,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.95.4",
-    "pg": "^8.5.1",
-    "plaid": "^8.2.0"
+    "pg": "^8.5.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

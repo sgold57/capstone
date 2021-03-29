@@ -53,12 +53,8 @@ table {
 /* SOURCE OF LINES 54-61:  */
 body {
   background: url("./BackgroundImage/capstone_background.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover; 
   background-size: 100% 100%;
-  color: white;
 }
 
 @font-face {
