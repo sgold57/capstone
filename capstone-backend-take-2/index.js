@@ -1,15 +1,15 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 const port = 8080;
 
-const knex = require("knex");
+const knex = require('knex');
 const config = require('./knexfile').development;
 const database = knex(config);
 
 require('dotenv').config();
 
-
 const axios = require('axios');
+
 app.get("/api", (req, res) => {
   axios.post('https://sandbox.plaid.com/sandbox/public_token/create', {
     "client_id": process.env.CLIENT_ID,
@@ -41,14 +41,11 @@ app.get("/api", (req, res) => {
     });
 })
 
-const plaid = require('plaid');
+app.get('/users', (req, res) => {
+  database('users')
+    .then(users => res.json({ users }))
+});
 
-
-app.get("/users", (_, response) => {
-  database('users_2')
-    .then(users_2 => response.json({ users_2 }));
-})
-
-
+// const plaid = require('plaid');
 
 app.listen(port, () => console.log(`listening on port ${port}`));
