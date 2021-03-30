@@ -99,11 +99,11 @@ app.post('/login', (req, res) => {
 
         if (!doPasswordsMatch) throw new Error ('Incorrect password')
 
-        const payload = { username: user.username }
-        const secret = "this is my secret secret"
+        const payload = { username: user.username };
+        const secret = process.env.TOKEN_SECRET;
 
         jwt.sign(payload, secret, (error, token) => {
-          if (error) throw new Error ("Unsuccessful Signing")
+          if (error) throw new Error ('Unsuccessful Signing')
 
           res.json({ token })
         })
@@ -112,6 +112,29 @@ app.post('/login', (req, res) => {
     })
   });
 
+  app.get("/secret-route", authenticate, (req, res) => {
+    res.json({ message: `${req.user.username} GOT EM`})
+  })
+
+  function authenticate(req, res, next){
+    const authHeader = req.get('Authorization');
+    const token = authHeader.split(" ")[1];
+
+    const secret = process.env.TOKEN_SECRET;
+    jwt.verify(token, secret, (error, payload) => {
+      if (error) res.json({ error: error.message });
+
+      database('users')
+        .select()
+        .where( {username: payload.username })
+        .first()
+        .then(user => { 
+          req.user = user
+          next()
+        }).catch(error =>
+          res.json({ error: error.message }))
+    })
+  }
 
 
 
