@@ -1,5 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const bcrypt = require("bcrypt");
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json())
+
+
 const port = 8080;
 
 const knex = require('knex');
@@ -44,6 +52,25 @@ app.get("/api", (req, res) => {
 app.get('/users', (req, res) => {
   database('users')
     .then(users => res.json({ users }))
+});
+
+app.post('/user', (req, res) => {
+  const { user } = req.body;
+  bcrypt.hash(user.password, 12)
+    .then(hashedPassword => {
+      return database("users")
+        .insert({ 
+          id: user.id,
+          username: user.username,
+          password: hashedPassword,
+          access_token: null,
+        }).returning("*")
+      }).then(users => {
+        const user = users[0]
+        res.json({ user })
+      }).catch(error => {
+      res.json({ error: error.message })
+    });
 });
 
 // const plaid = require('plaid');
