@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
 
+
 const port = 8080;
 
 const knex = require('knex');
@@ -73,6 +74,7 @@ app.post('/user', (req, res) => {
       res.json({ error: error.message })
     });
 });
+
 
 // const plaid = require('plaid');
 

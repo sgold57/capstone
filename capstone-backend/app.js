@@ -45,8 +45,8 @@ const plaid = require('plaid');
 
 
 app.get("/users", (_, response) => {
-  database('users')
-    .then(users => response.json({ users }));
+  database('users_2')
+    .then(users_2 => response.json({ users_2 }));
 })
 
 
