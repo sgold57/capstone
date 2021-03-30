@@ -1,7 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const bcrypt = require("bcrypt");
 const app = express();
+
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -18,6 +21,7 @@ const database = knex(config);
 require('dotenv').config();
 
 const axios = require('axios');
+const { response } = require('express');
 
 app.get("/api", (req, res) => {
   axios.post('https://sandbox.plaid.com/sandbox/public_token/create', {
@@ -74,6 +78,41 @@ app.post('/user', (req, res) => {
       res.json({ error: error.message })
     });
 });
+
+app.post('/login', (req, res) => {
+  const { user } = req.body;
+
+  database("users")
+    .select()
+    .where({ username: user.username })
+    .first()
+    .then(retrievedUser => {
+      if (!retrievedUser) throw new Error ('Not a user.')
+
+      return Promise.all([
+        bcrypt.compare(user.password, retrievedUser.password),
+        Promise.resolve(retrievedUser),
+      ])
+    }).then(results => {
+        const doPasswordsMatch = results[0]
+        const user = results[1]
+
+        if (!doPasswordsMatch) throw new Error ('Incorrect password')
+
+        const payload = { username: user.username }
+        const secret = "this is my secret secret"
+
+        jwt.sign(payload, secret, (error, token) => {
+          if (error) throw new Error ("Unsuccessful Signing")
+
+          res.json({ token })
+        })
+    }).catch(error => {
+      res.json(error.message)
+    })
+  });
+
+
 
 
 // const plaid = require('plaid');
