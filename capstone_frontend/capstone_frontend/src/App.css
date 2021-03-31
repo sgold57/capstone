@@ -115,14 +115,14 @@ body {
 #dashboard-heading{
   color: rgb(34, 108, 168);
   font-family: Warmonger;
-  font-size: 4.5vw;
-  padding-top: 120px;
+  font-size: 4.7vw;
+  padding-top: 130px;
   padding-bottom: 15px;
   text-align: center;
   letter-spacing: 2px;
 }
 
-#ok{
+#main-container{
   border: 1px solid orange;
   color: orange;
   text-align: center;
@@ -131,8 +131,8 @@ body {
   height: 525px;
 }
 
-#alright{
-  margin-top: 120px;
+#dashboard-footer{
+  margin-top: 110px;
   margin-left: 300px;
   margin-right: 300px;
   font-family: CityPBol;
@@ -151,6 +151,7 @@ body {
 #log-out-button{
   display: inline-block;
 }
+
 #bank-that{
   display: inline-block;
   margin-left: 60px;

@@ -15,7 +15,7 @@ export default class Dashboard extends Component {
       <div>
         <div id="dashboard-name-div">SOULJABOYTELLER.COM</div>
         <h1 id="dashboard-heading">WELCOME BACK {this.props.username}</h1>
-        <AccountContainer />
+        <AccountContainer history={this.props.history}/>
       </div>
     )
   }
