@@ -4,11 +4,15 @@ const app = express();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cors = require('cors')
+
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json())
+
+app.use(cors())
 
 
 
@@ -22,6 +26,20 @@ require('dotenv').config();
 
 const axios = require('axios');
 const { response } = require('express');
+
+app.post("/accounts", (req, res) => {
+  console.log(req)
+  axios.post('https://sandbox.plaid.com/auth/get', {
+    "client_id": process.env.CLIENT_ID,
+    "secret": process.env.SECRET,
+    "access_token": req.body.access_token
+  })
+    .then(function({ data: { accounts }}) {
+      console.log({ accounts })
+      res.send({ accounts })
+    })
+  
+  })
 
 app.get("/api", (req, res) => {
   axios.post('https://sandbox.plaid.com/sandbox/public_token/create', {
@@ -69,7 +87,7 @@ app.post('/user', (req, res) => {
           id: user.id,
           username: user.username,
           password: hashedPassword,
-          access_token: null,
+          access_token: "access-sandbox-49cb24cc-bfa9-4a08-8593-2602ef135814"
         }).returning("*")
       }).then(users => {
         const user = users[0]
@@ -105,7 +123,8 @@ app.post('/login', (req, res) => {
         jwt.sign(payload, secret, (error, token) => {
           if (error) throw new Error ('Unsuccessful Signing')
 
-          res.json({ token })
+          return res.json({ token })
+          
         })
     }).catch(error => {
       res.json(error.message)
@@ -135,6 +154,16 @@ app.post('/login', (req, res) => {
           res.json({ error: error.message }))
     })
   }
+
+  app.get("/getUser/:username", (req, res) => {
+    console.log(req, req.params)
+    database('users')
+      .select()
+      .where ({ username: req.params.username})
+      .then(users => res.json(users[0]));
+  })
+
+  
 
 
 
