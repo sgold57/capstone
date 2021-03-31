@@ -102,3 +102,56 @@ body {
   padding: 25px 150px;
   justify-content: space-around;
 }
+
+#dashboard-name-div{
+  font-family: CityPBol;
+  color: rgb(238, 115, 46);
+  padding-top: 10px;
+  text-align: center;
+  font-size: 2vw;
+
+}
+
+#dashboard-heading{
+  color: rgb(34, 108, 168);
+  font-family: Warmonger;
+  font-size: 4.5vw;
+  padding-top: 120px;
+  padding-bottom: 15px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+#ok{
+  border: 1px solid orange;
+  color: orange;
+  text-align: center;
+  margin-left: 100px;
+  margin-right: 100px;
+  height: 525px;
+}
+
+#alright{
+  margin-top: 120px;
+  margin-left: 300px;
+  margin-right: 300px;
+  font-family: CityPBol;
+  color: rgb(238, 115, 46);
+  font-size: 2vw;
+  height: 25px;
+}
+
+#superman{
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 30px;
+}
+
+
+#log-out-button{
+  display: inline-block;
+}
+#bank-that{
+  display: inline-block;
+  margin-left: 60px;
+}
