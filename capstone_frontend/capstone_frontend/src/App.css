@@ -117,24 +117,28 @@ body {
   font-family: Warmonger;
   font-size: 4.7vw;
   padding-top: 130px;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
   text-align: center;
   letter-spacing: 2px;
 }
 
-#main-container{
-  border: 1px solid orange;
-  color: orange;
-  text-align: center;
+
+#main-container-div{
+  display: flex;
   margin-left: 100px;
   margin-right: 100px;
   height: 525px;
+}
+
+#main-container{
+  display:flex;
 }
 
 #dashboard-footer{
   margin-top: 110px;
   margin-left: 300px;
   margin-right: 300px;
+  padding-bottom: 20px;
   font-family: CityPBol;
   color: rgb(238, 115, 46);
   font-size: 2vw;
@@ -155,4 +159,44 @@ body {
 #bank-that{
   display: inline-block;
   margin-left: 60px;
+}
+
+.account-card{
+  font-family: CityPBol;
+  border: 0.5px dotted orange;
+  margin-left: 35px;
+  margin-right:35px;
+  padding-top: 10px;
+  width: 300px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+/* #account-card-two{
+  color: rgb(238, 115, 46);
+  font-family: CityPBol;
+  border: 0.5px dotted rgb(238, 115, 46);
+  margin-left: 10px;
+  margin-right: 25px;
+  width: 300px;
+  text-transform: capitalize
+} */
+
+#main-pic{
+  height: 292px;
+  width: 375px;
+  margin-left: 10px;
+  align-self: center;
+}
+
+.account-name, .account-type, .account-balance{
+  color: rgb(238, 115, 46);
+  font-size: 32px;
+  padding-bottom: 5px;
+}
+
+.account-name-value, .account-type-value, .account-balance-value{
+  font-size: 24px;
+  padding-bottom: 25px;
+  color: rgb(34, 108, 168);
 }

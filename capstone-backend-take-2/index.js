@@ -29,7 +29,7 @@ const { response } = require('express');
 
 app.post("/accounts", (req, res) => {
   console.log(req)
-  axios.post('https://sandbox.plaid.com/auth/get', {
+  axios.post('https://sandbox.plaid.com/accounts/balance/get', {
     "client_id": process.env.CLIENT_ID,
     "secret": process.env.SECRET,
     "access_token": req.body.access_token
@@ -38,7 +38,7 @@ app.post("/accounts", (req, res) => {
       console.log({ accounts })
       res.send({ accounts })
     })
-  
+      
   })
 
 app.get("/api", (req, res) => {
@@ -87,7 +87,7 @@ app.post('/user', (req, res) => {
           id: user.id,
           username: user.username,
           password: hashedPassword,
-          access_token: "access-sandbox-49cb24cc-bfa9-4a08-8593-2602ef135814"
+          access_token: null
         }).returning("*")
       }).then(users => {
         const user = users[0]
