@@ -79,6 +79,8 @@ app.get('/users', (req, res) => {
 
 app.post('/user', (req, res) => {
   const { user } = req.body;
+
+  console.log(user)
   
   bcrypt.hash(user.password, 12)
     .then(hashedPassword => {
