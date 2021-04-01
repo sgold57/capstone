@@ -10,7 +10,8 @@ export default class App extends Component {
 
   state = {
     username: "",
-    accounts: []
+    accounts: [],
+    receivedAccounts: false
   }
 
   getUser = (user) => {
@@ -30,7 +31,8 @@ export default class App extends Component {
           })
         }).then(results => results.json())
         .then(accs => {
-          let allAccounts = accs.accounts
+          let allAccounts = accs.accounts.slice(0,2);
+          console.log(allAccounts)
           this.setState({ accounts: allAccounts })
         })
       })
