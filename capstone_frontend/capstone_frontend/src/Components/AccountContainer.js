@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import Home from './Home';
-import AccountCard from "./AccountCard";
+import AccountCardBalance from "./AccountCardBalance";
+import AccountCardInvestment from "./AccountCardInvestment";
+import AccountCardLoan from "./AccountCardLoan";
+
+import DashboardFooter from "./DashboardFooter"
+
 
 
 
@@ -15,27 +19,39 @@ export default class AccountContainer extends Component {
   render(){
     return(
       <div>
-        <div id="main-container-div">
-          <div id="main-container"> 
+        <div id="main-container">
+            <div id="container-div-left"> 
+                {this.props.accounts.length > 0
+                  ? <AccountCardBalance account={this.props.accounts[0]} />
+                  : null
+                }
+                {this.props.accounts.length > 0
+                  ? <AccountCardBalance account={this.props.accounts[1]} />
+                  : null
+                }
+            </div>
+            <div id="container-div-middle">
+              <span id="superman">SUPERMAN THAT DOUGH!</span>
+              <img id="main-pic" src="https://imgix.ranker.com/user_node_img/104/2064074/original/soulja-boy-photo-u25?auto=format&q=60&fit=crop&fm=pjpg&w=375" alt="soulja boy" />
+              <span id="bank-that">BANK THAT!</span>
+            </div>
+            <div id="container-div-right">
               {this.props.accounts.length > 0
-                ? <AccountCard account={this.props.accounts[0]} />
+                ? <AccountCardInvestment account={this.props.accounts[2]} />
                 : null
               }
-            <img id="main-pic" src="https://imgix.ranker.com/user_node_img/104/2064074/original/soulja-boy-photo-u25?auto=format&q=60&fit=crop&fm=pjpg&w=375" alt="soulja boy" />
-            {this.props.accounts.length > 0
-                ? <AccountCard account={this.props.accounts[1]} />
+              {this.props.accounts.length > 0
+                ? <AccountCardLoan account={this.props.accounts[3]} />
                 : null
               }
+            </div>
           </div>
-        </div>
-        <div id="dashboard-footer">
-          <span id="superman">SUPERMAN THAT DOUGH!</span>
-          <button id="log-out-button" onClick={this.logout}>LOG OUT</button>
-          <span id="bank-that">BANK THAT!</span>
-        </div>
-      </div>
-      
-    )
+          <DashboardFooter logout={this.logout} />
+        </div>   
+      )
+    }
   }
-}
 
+
+
+  

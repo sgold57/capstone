@@ -31,7 +31,9 @@ export default class App extends Component {
           })
         }).then(results => results.json())
         .then(accs => {
-          let allAccounts = accs.accounts.slice(0,2);
+          let checkingSavings = accs.accounts.slice(0,2);
+          let loans401k = accs.accounts.slice(6,8);
+          let allAccounts = checkingSavings.concat(loans401k);
           console.log(allAccounts)
           this.setState({ accounts: allAccounts })
         })
@@ -39,6 +41,8 @@ export default class App extends Component {
 
 
   }
+
+ 
 
   
   render(){
