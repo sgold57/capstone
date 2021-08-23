@@ -25,7 +25,6 @@ const database = knex(config);
 require('dotenv').config();
 
 const axios = require('axios');
-const { response } = require('express');
 
 app.post("/accounts", (req, res) => {
   console.log(req)
@@ -80,7 +79,6 @@ app.get('/users', (req, res) => {
 app.post('/user', (req, res) => {
   const { user } = req.body;
 
-  console.log(user)
   
   bcrypt.hash(user.password, 12)
     .then(hashedPassword => {
