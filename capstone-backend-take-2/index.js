@@ -25,18 +25,15 @@ const database = knex(config);
 require('dotenv').config();
 
 const axios = require('axios');
-const { response } = require('express');
 
 app.post("/accounts", (req, res) => {
-  console.log(req)
   axios.post('https://sandbox.plaid.com/accounts/balance/get', {
     "client_id": process.env.CLIENT_ID,
     "secret": process.env.SECRET,
     "access_token": req.body.access_token
   })
     .then(function({ data: { accounts }}) {
-      console.log({ accounts })
-      res.send({ accounts })
+      res.send(accounts)
     })
       
   })
@@ -80,7 +77,6 @@ app.get('/users', (req, res) => {
 app.post('/user', (req, res) => {
   const { user } = req.body;
 
-  console.log(user)
   
   bcrypt.hash(user.password, 12)
     .then(hashedPassword => {
@@ -89,7 +85,7 @@ app.post('/user', (req, res) => {
           id: user.id,
           username: user.username,
           password: hashedPassword,
-          access_token: null
+          access_token: user.access_token
         }).returning("*")
       }).then(users => {
         const user = users[0]
@@ -158,12 +154,23 @@ app.post('/login', (req, res) => {
   }
 
   app.get("/getUser/:username", (req, res) => {
-    console.log(req, req.params)
     database('users')
       .select()
       .where ({ username: req.params.username})
       .then(users => res.json(users[0]));
   })
+
+  // app.post("/newUser", (req, res) => {
+  //   const { newUser } = req.body;
+  //   console.log(newUser)
+    
+  //   database('users')
+  //     .insert([
+  //       { username: newUser.username },
+  //       { password: newUser.password },
+  //       { access_token: newUser.access_token }
+  //     ])
+  // })
 
   
 

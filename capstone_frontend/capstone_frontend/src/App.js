@@ -29,12 +29,15 @@ export default class App extends Component {
           body: JSON.stringify({
             "access_token": retrievedUser.access_token
           })
-        }).then(results => results.json())
+        }).then(results => {
+            results.json();
+        })
+          
         .then(accs => {
+          console.log(accs)
           let checkingSavings = accs.accounts.slice(0,2);
           let loans401k = accs.accounts.slice(6,8);
           let allAccounts = checkingSavings.concat(loans401k);
-          console.log(allAccounts)
           this.setState({ accounts: allAccounts })
         })
       })
