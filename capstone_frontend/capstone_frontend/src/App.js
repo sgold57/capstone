@@ -21,6 +21,8 @@ export default class App extends Component {
       .then(response => response.json())
       .then(retrievedUser => {
         this.setState({ user: retrievedUser })
+
+
         fetch(`http://localhost:8080/accounts`, {
           method: "POST",
           headers: {
@@ -29,12 +31,8 @@ export default class App extends Component {
           body: JSON.stringify({
             "access_token": retrievedUser.access_token
           })
-        }).then(results => {
-            results.json();
-        })
-          
+        }).then(results => results.json())  
         .then(accs => {
-          console.log(accs)
           let checkingSavings = accs.accounts.slice(0,2);
           let loans401k = accs.accounts.slice(6,8);
           let allAccounts = checkingSavings.concat(loans401k);

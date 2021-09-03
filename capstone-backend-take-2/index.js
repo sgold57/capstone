@@ -32,9 +32,7 @@ app.post("/accounts", (req, res) => {
     "secret": process.env.SECRET,
     "access_token": req.body.access_token
   })
-    .then(function({ data: { accounts }}) {
-      res.send(accounts)
-    })
+    .then( ({data: { accounts }}) => res.send( { accounts }))
       
   })
 
